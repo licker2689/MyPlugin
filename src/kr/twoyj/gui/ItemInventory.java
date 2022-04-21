@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class ItemInventory implements Listener {
-    private final Teleport Teleport = new Teleport();
+    private final Teleport TP = new Teleport();
     final Inventory inv = Bukkit.createInventory(null, 54, "메뉴");
 
     public ItemInventory() {
@@ -147,37 +147,37 @@ public class ItemInventory implements Listener {
             case "스폰 이동":
                 e.setCancelled(true);
                 p.closeInventory();
-                Teleport.teleportSpawn(p);
+                TP.teleportSpawn(p);
                 break;
             case "로비 이동":
                 e.setCancelled(true);
                 p.closeInventory();
-                Teleport.teleportLobby(p);
+                TP.teleportLobby(p);
                 break;
             case "도박장 이동":
                 e.setCancelled(true);
                 p.closeInventory();
-                Teleport.teleportCasino(p);
+                TP.teleportCasino(p);
                 break;
             case "미니게임 이동":
                 e.setCancelled(true);
                 p.closeInventory();
-                Teleport.teleportMinigame1(p);
+                TP.teleportMinigame1(p);
                 break;
             case "야생1 이동":
                 e.setCancelled(true);
                 p.closeInventory();
-                Teleport.teleportSurvival1(p);
+                TP.teleportSurvival1(p);
                 break; //야생1 이동
             case "야생2 이동":
                 e.setCancelled(true);
                 p.closeInventory();
-                Teleport.teleportSurvival2(p);
+                TP.teleportSurvival2(p);
                 break; //야생2 이동
             case "야생3 이동":
                 e.setCancelled(true);
                 p.closeInventory();
-                Teleport.teleportSurvival3(p);
+                TP.teleportSurvival3(p);
                 break; //야생3 이동
             case "메뉴 닫기":
                 e.setCancelled(true);
@@ -186,7 +186,7 @@ public class ItemInventory implements Listener {
             case "기록된 위치 삭제":
                 e.setCancelled(true);
                 p.closeInventory();
-                Teleport.resetRecordLocatins(p);
+                TP.resetRecordLocatins(p);
                 break;
             default:
                 e.setCancelled(true);

@@ -24,7 +24,6 @@ public class MPCommand implements CommandExecutor, TabCompleter {
     */
 
     private final Teleport TP = new Teleport();
-    private final GUIPlugin GP = new GUIPlugin();
 
     public static Map<UUID, Location> map1 = new HashMap<>();
     public static Map<UUID, Location> map2 = new HashMap<>();
@@ -147,14 +146,16 @@ public class MPCommand implements CommandExecutor, TabCompleter {
                     return true;
                 } //mp reload server
                 else if (args[1].equalsIgnoreCase("config")) {
-                    GP.saveMaps();
+                    /*GP.saveMaps();
                     sender.sendMessage(ChatColor.GREEN + "설정이 재로드 - 저장 완료");
                     GP.restoreMaps();
                     sender.sendMessage(ChatColor.GREEN + "설정이 재로드 - 불러오기 완료");
-                    sender.sendMessage(ChatColor.GREEN + "설정이 재로드가 완료되었습니다!");
-                }
+                    sender.sendMessage(ChatColor.GREEN + "설정이 재로드가 완료되었습니다!");*/
+
+                    sender.sendMessage(ChatColor.RED + "오류: 이 명령어는 아직 사용할 수 없습니다!");
+                } //mp reload config
                 else {
-                    sender.sendMessage(ChatColor.RED + "Usages: /mp reload <server>");
+                    sender.sendMessage(ChatColor.RED + "Usages: /mp reload <server|config>");
                 }
             }
             else {
@@ -164,12 +165,9 @@ public class MPCommand implements CommandExecutor, TabCompleter {
         } //mp reload <server|config>
         else if (args[0].equalsIgnoreCase("reset")) {
             if (sender.isOp()) {
-                final Collection<? extends Player> players = Bukkit.getOnlinePlayers();
-                for (Player player : players) {
-                    World PlayerWorld = player.getWorld();
-
+                for (Player player : Bukkit.getOnlinePlayers()) {
                     if (!player.isOp()) {
-                        switch (PlayerWorld.getName()) {
+                        switch (player.getWorld().getName()) {
                             case "world":
                             case "casino":
                             case "co_01":
@@ -202,7 +200,7 @@ public class MPCommand implements CommandExecutor, TabCompleter {
         else if (args[0].equalsIgnoreCase("stop")) {
             if (sender.isOp()) {
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.kickPlayer("서버가 종료됩니다.");
+                    player.kickPlayer("흐하하핳ㅎㅎㅎ ㅎ흐하하하하하하흐흐하하핳ㅎ하핳허ㅓ허헣ㅎ흐흫허허헣ㅎ");
                 }
                 Bukkit.shutdown();
                 return true;
