@@ -18,6 +18,7 @@ import static kr.twoyj.cmd.MPCommand.*;
 import static kr.twoyj.cmd.Ticket.ticket;
 
 public class GUIPlugin extends JavaPlugin implements CommandExecutor {
+    private static GUIPlugin instance;
     Timer timerForAnnouncement = new Timer();
     int i = 0;
 
@@ -33,6 +34,8 @@ public class GUIPlugin extends JavaPlugin implements CommandExecutor {
         getCommand("sethome").setExecutor(new SetHome());
         getCommand("home").setExecutor(new Home());
         getCommand("tk").setExecutor(new Ticket());
+
+        instance = this;
 
         timerForAnnouncement.schedule(new TimerTask() {
             @Override
@@ -54,6 +57,10 @@ public class GUIPlugin extends JavaPlugin implements CommandExecutor {
         saveMaps3();
         saveHome();
         saveTicket();
+    }
+
+    public static GUIPlugin getInstance() {
+        return instance;
     }
 
     private void sendAnnoucement() {

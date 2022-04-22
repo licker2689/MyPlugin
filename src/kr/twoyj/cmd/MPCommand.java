@@ -12,6 +12,9 @@ import org.bukkit.entity.Player;
 import java.util.*;
 
 public class MPCommand implements CommandExecutor, TabCompleter {
+    private final GUIPlugin main = GUIPlugin.getInstance();
+    private final Teleport TP = Teleport.getInstance();
+
     /*
     surv1, 144, 63, 118
     surv2, 128, 71, 16
@@ -22,8 +25,6 @@ public class MPCommand implements CommandExecutor, TabCompleter {
     co_01, 46, 52, -19
     minigame1, 0, -60, 0
     */
-
-    private final Teleport TP = new Teleport();
 
     public static Map<UUID, Location> map1 = new HashMap<>();
     public static Map<UUID, Location> map2 = new HashMap<>();
@@ -51,6 +52,7 @@ public class MPCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(ChatColor.RED + "해당 명령어는 플레이어만 사용 가능합니다.");
                 return false;
             } //콘솔등에서 입력시
+
             Player p = (Player) sender;
 
             if (p.hasPermission("myplugin.teleport")) {
@@ -133,6 +135,7 @@ public class MPCommand implements CommandExecutor, TabCompleter {
                 sender.sendMessage(ChatColor.RED + "해당 명령어는 플레이어만 사용 가능합니다.");
                 return false;
             } //콘솔등에서 입력시
+
             Player p = (Player) sender;
 
             TP.teleportLobby(p);
@@ -140,22 +143,27 @@ public class MPCommand implements CommandExecutor, TabCompleter {
         } //mp lobby
         else if (args[0].equalsIgnoreCase("reload")) {
             if (sender.isOp()) {
-                if (args[1].equalsIgnoreCase("server")) {
-                    Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "서버가 재로드됩니다! 안전한곳에서 움직이지 말아주세요.");
-                    Bukkit.reload();
-                    return true;
-                } //mp reload server
-                else if (args[1].equalsIgnoreCase("config")) {
-                    /*GP.saveMaps();
-                    sender.sendMessage(ChatColor.GREEN + "설정이 재로드 - 저장 완료");
-                    GP.restoreMaps();
-                    sender.sendMessage(ChatColor.GREEN + "설정이 재로드 - 불러오기 완료");
-                    sender.sendMessage(ChatColor.GREEN + "설정이 재로드가 완료되었습니다!");*/
-
-                    sender.sendMessage(ChatColor.RED + "오류: 이 명령어는 아직 사용할 수 없습니다!");
-                } //mp reload config
-                else {
+                if (args[1].length() < 1) {
+                    sender.sendMessage(ChatColor.RED + "오류: 무엇을 리로드 할지 입력해 주세요.");
                     sender.sendMessage(ChatColor.RED + "Usages: /mp reload <server|config>");
+                }
+                else {
+                    if (args[1].equalsIgnoreCase("server")) {
+                        Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE + "서버가 재로드됩니다! 안전한곳에서 움직이지 말아주세요.");
+                        Bukkit.reload();
+                        return true;
+                    } //mp reload server
+                    else if (args[1].equalsIgnoreCase("config")) {
+                        main.saveMaps();
+                        sender.sendMessage(ChatColor.GREEN + "설정이 재로드 - 저장 완료");
+                        main.restoreMaps();
+                        sender.sendMessage(ChatColor.GREEN + "설정이 재로드 - 불러오기 완료");
+                        sender.sendMessage(ChatColor.GREEN + "설정이 재로드가 완료되었습니다!");
+                    } //mp reload config
+                    else {
+                        sender.sendMessage(ChatColor.RED + "오류: 무엇을 리로드 할지 정확히 주세요.");
+                        sender.sendMessage(ChatColor.RED + "Usages: /mp reload <server|config>");
+                    }
                 }
             }
             else {
@@ -168,24 +176,9 @@ public class MPCommand implements CommandExecutor, TabCompleter {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     if (!player.isOp()) {
                         switch (player.getWorld().getName()) {
-                            case "world":
-                            case "casino":
-                            case "co_01":
-                            case "minigame1":
-                                resetMessage(player, GameMode.ADVENTURE);
-                                break;
-                            case "surv1":
-                            case "surv2":
-                            case "surv3":
-                            case "surv1_nehter":
-                            case "surv2_nehter":
-                            case "surv3_nehter":
-                            case "world_the_end":
-                                resetMessage(player, GameMode.SURVIVAL);
-                                break;
-                            default:
-                                player.sendMessage(ChatColor.GREEN + player.getName() + ChatColor.LIGHT_PURPLE + "님은 현재, " + ChatColor.GREEN + player.getWorld().getName() + ChatColor.LIGHT_PURPLE + "월드에 있으며, 해당월드는 인식되지 않았으므로 게임모드를 변경하지 못했음을 알려드립니다.");
-                                break;
+                            case "world", "casino", "co_01", "minigame1" -> resetMessage(player, GameMode.ADVENTURE);
+                            case "surv1", "surv2", "surv3", "surv1_nehter", "surv2_nehter", "surv3_nehter", "world_the_end" -> resetMessage(player, GameMode.SURVIVAL);
+                            default -> player.sendMessage(ChatColor.GREEN + player.getName() + ChatColor.LIGHT_PURPLE + "님은 현재, " + ChatColor.GREEN + player.getWorld().getName() + ChatColor.LIGHT_PURPLE + "월드에 있으며, 해당월드는 인식되지 않았으므로 게임모드를 변경하지 못했음을 알려드립니다.");
                         }
                     } else {
                         player.sendMessage(ChatColor.GREEN + player.getName() + ChatColor.LIGHT_PURPLE + "님은 현재, " + ChatColor.GREEN + player.getWorld().getName() + ChatColor.LIGHT_PURPLE + "월드에 있으며, OP권한이 있어 게임모드가 변경되지 않았음을 알려드립니다.");
@@ -213,7 +206,7 @@ public class MPCommand implements CommandExecutor, TabCompleter {
         else if (args[0].equalsIgnoreCase("help")) {
             sender.sendMessage(ChatColor.GREEN + "======/mp - help======");
             sender.sendMessage(ChatColor.RED + "/mp about - 플러그인의 정보를 출력합니다.");
-            sender.sendMessage(ChatColor.RED + "/mp tp <spawn, lobby, surv1, surv2, surv3, casino, minigame1> - 야생등으로 텔레포트합니다.");
+            sender.sendMessage(ChatColor.RED + "/mp tp <spawn, lobby, surv1, surv2, surv3, casino, minigame1> - 야생등의 위치로 텔레포트합니다.");
             sender.sendMessage(ChatColor.RED + "/mp lobby - 로비로 텔레포트합니다.");
         } //mp help
         return false;
@@ -227,7 +220,9 @@ public class MPCommand implements CommandExecutor, TabCompleter {
         if (args[0].equalsIgnoreCase("tp")) {
             return sender.isOp() ? Arrays.asList("spawn", "lobby", "casino", "minigame1", "survival1", "survival2", "survival3", "zw", "zb")
                     : Arrays.asList("spawn", "lobby", "casino", "minigame1", "survival1", "survival2", "survival3");
-        } else if (args[0].equalsIgnoreCase("about") || args[0].equalsIgnoreCase("lobby") || args[0].equalsIgnoreCase("reload") || args[0].equalsIgnoreCase("reset")
+        } else if (args[0].equalsIgnoreCase("reload")) {
+            return sender.isOp() ? Arrays.asList("server", "config") : List.of("");
+        } else if (args[0].equalsIgnoreCase("about") || args[0].equalsIgnoreCase("lobby") || args[0].equalsIgnoreCase("reset")
                 || args[0].equalsIgnoreCase("stop") || args[0].equalsIgnoreCase("help")) {
             return List.of("");
         } else {
@@ -237,17 +232,13 @@ public class MPCommand implements CommandExecutor, TabCompleter {
 
     private void resetMessage(Player p, GameMode gm) {
         switch (gm) {
-            case SURVIVAL:
-                p.setGameMode(GameMode.SURVIVAL);
-                break;
-            case ADVENTURE:
-                p.setGameMode(GameMode.ADVENTURE);
-                break;
+            case SURVIVAL -> p.setGameMode(GameMode.SURVIVAL);
+            case ADVENTURE -> p.setGameMode(GameMode.ADVENTURE);
         }
         p.sendMessage(ChatColor.GREEN + p.getName() + ChatColor.LIGHT_PURPLE + "님은 현재, " + ChatColor.GREEN + p.getWorld().getName() + ChatColor.LIGHT_PURPLE + "월드에 있으므로, " + ChatColor.GREEN + p.getGameMode() + ChatColor.LIGHT_PURPLE + "모드로 변경되었음을 알려드립니다.");
     }
 
-    public void no_permissions(Player p, String permissions) {
+    private void no_permissions(Player p, String permissions) {
         p.sendMessage(ChatColor.RED + "오류: 당신은 이 명령어를 사용할 권한이 없습니다!");
         p.sendMessage(ChatColor.LIGHT_PURPLE + "안내: 어드민에게 아래 정보와 함께 권한을 요청해보세요.");
         p.sendMessage(ChatColor.LIGHT_PURPLE + "플레이어: " + ChatColor.WHITE + p.getName() + ChatColor.LIGHT_PURPLE + " 퍼미션: " + ChatColor.WHITE + permissions);

@@ -9,7 +9,14 @@ import java.util.UUID;
 import static kr.twoyj.cmd.MPCommand.*;
 
 public class Teleport {
-    private final MPCommand MPC = new MPCommand();
+    private static Teleport instance;
+
+    public static Teleport getInstance() {
+        if (instance == null) {
+            instance = new Teleport();
+        }
+        return instance;
+    }
 
     public void teleportSpawn(Player p) {
         if (p.hasPermission("myplugin.teleport.lobby")) {
@@ -33,7 +40,7 @@ public class Teleport {
 
             gamemode_adventure(p);
         } else {
-            MPC.no_permissions(p, "myplugin.teleport.lobby");
+            no_permissions(p, "myplugin.teleport.lobby");
         }
     }
 
@@ -59,7 +66,7 @@ public class Teleport {
 
             gamemode_adventure(p);
         } else {
-            MPC.no_permissions(p, "myplugin.teleport.lobby");
+            no_permissions(p, "myplugin.teleport.lobby");
         }
     }
 
@@ -85,7 +92,7 @@ public class Teleport {
 
             gamemode_adventure(p);
         } else {
-            MPC.no_permissions(p, "myplugin.teleport.casino");
+            no_permissions(p, "myplugin.teleport.casino");
         }
     }
 
@@ -112,7 +119,7 @@ public class Teleport {
             gamemode_adventure(p);
 
         } else {
-            MPC.no_permissions(p, "myplugin.teleport.minigame1");
+            no_permissions(p, "myplugin.teleport.minigame1");
         }
     }
 
@@ -147,7 +154,7 @@ public class Teleport {
                 }
             }
         } else {
-            MPC.no_permissions(p, "myplugin.teleport.survival");
+            no_permissions(p, "myplugin.teleport.survival");
         }
     }
 
@@ -182,7 +189,7 @@ public class Teleport {
                 }
             }
         } else {
-            MPC.no_permissions(p, "myplugin.teleport.survival");
+            no_permissions(p, "myplugin.teleport.survival");
         }
     }
 
@@ -217,7 +224,7 @@ public class Teleport {
                 }
             }
         } else {
-            MPC.no_permissions(p, "myplugin.teleport.survival");
+            no_permissions(p, "myplugin.teleport.survival");
         }
     }
 
@@ -263,5 +270,11 @@ public class Teleport {
         } else if (p.isOp()) {
             p.sendMessage(ChatColor.LIGHT_PURPLE + "게임모드가 변경되지 않았습니다. 사유: 해당 플레이어는 OP를 소유하고 있습니다.");
         }
+    }
+
+    private void no_permissions(Player p, String permissions) {
+        p.sendMessage(ChatColor.RED + "오류: 당신은 이 명령어를 사용할 권한이 없습니다!");
+        p.sendMessage(ChatColor.LIGHT_PURPLE + "안내: 어드민에게 아래 정보와 함께 권한을 요청해보세요.");
+        p.sendMessage(ChatColor.LIGHT_PURPLE + "플레이어: " + ChatColor.WHITE + p.getName() + ChatColor.LIGHT_PURPLE + " 퍼미션: " + ChatColor.WHITE + permissions);
     }
 }
