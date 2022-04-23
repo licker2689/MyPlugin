@@ -248,33 +248,15 @@ public class Ticket implements CommandExecutor, TabCompleter {
             return null;
         }
 
-        if (args[0].equalsIgnoreCase("add")) {
-            getPlayers();
-            return sender.isOp() ? players : Arrays.asList("이 기능을 사용할 권한이 없습니다!");
-        } else if (args[0].equalsIgnoreCase("set")) {
-            getPlayers();
-            return sender.isOp() ? players : Arrays.asList("이 기능을 사용할 권한이 없습니다!");
-        } else if (args[0].equalsIgnoreCase("remove")) {
-            getPlayers();
-            return sender.isOp() ? players : Arrays.asList("이 기능을 사용할 권한이 없습니다!");
-        } else if (args[0].equalsIgnoreCase("gift")) {
-            getPlayers();
-            return Arrays.asList(Bukkit.getOnlinePlayers().toString());
-        } else if (args[0].equalsIgnoreCase("clear")) {
-            getPlayers();
-            return sender.isOp() ? players : Arrays.asList("이 기능을 사용할 권한이 없습니다!");
-        } else if (args[0].equalsIgnoreCase("buy")) {
+        if (args[0].equalsIgnoreCase("buy")) {
+            switch(args[1]) {
+                case "1", "2", "3", "4", "5", "6", "7" -> { return List.of(""); }
+            }
             return Arrays.asList("1", "2", "3", "4", "5", "6", "7");
         } else if (args[0].equalsIgnoreCase("value") || args[0].equalsIgnoreCase("help")) {
             return List.of("");
         } else {
             return sender.isOp() ? Arrays.asList("add", "set", "remove", "clear", "value", "gift", "buy", "help") : Arrays.asList("value", "gift", "buy", "help");
-        }
-    }
-
-    private void getPlayers() {
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            players.add(p.getName());
         }
     }
 }

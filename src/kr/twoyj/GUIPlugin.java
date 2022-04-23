@@ -9,6 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
@@ -19,6 +20,7 @@ import static kr.twoyj.cmd.Ticket.ticket;
 
 public class GUIPlugin extends JavaPlugin implements CommandExecutor {
     private static GUIPlugin instance;
+
     Timer timerForAnnouncement = new Timer();
     int i = 0;
 

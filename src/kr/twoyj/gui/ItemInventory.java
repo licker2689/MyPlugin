@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -18,7 +19,6 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class ItemInventory implements Listener {
-    private final Teleport TP = new Teleport();
     final Inventory inv = Bukkit.createInventory(null, 54, "메뉴");
 
     public ItemInventory() {
@@ -130,13 +130,13 @@ public class ItemInventory implements Listener {
     }
 
     @EventHandler
-    public void onOpenItemInventory(OpenItemInventoryEvent e) {
+    private void onOpenItemInventory(OpenItemInventoryEvent e) {
         Init();
         e.player.openInventory(inv);
     }
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent e) {
+    private void onInventoryClick(InventoryClickEvent e) {
         if (e.getInventory() != inv) return;
         ItemStack clickedItem = e.getCurrentItem();
         if (clickedItem == null || clickedItem.getType() == Material.AIR) return;
@@ -147,37 +147,37 @@ public class ItemInventory implements Listener {
             case "스폰 이동":
                 e.setCancelled(true);
                 p.closeInventory();
-                TP.teleportSpawn(p);
+                Teleport.getInstance().teleportSpawn(p);
                 break;
             case "로비 이동":
                 e.setCancelled(true);
                 p.closeInventory();
-                TP.teleportLobby(p);
+                Teleport.getInstance().teleportLobby(p);
                 break;
             case "도박장 이동":
                 e.setCancelled(true);
                 p.closeInventory();
-                TP.teleportCasino(p);
+                Teleport.getInstance().teleportCasino(p);
                 break;
             case "미니게임 이동":
                 e.setCancelled(true);
                 p.closeInventory();
-                TP.teleportMinigame1(p);
+                Teleport.getInstance().teleportMinigame1(p);
                 break;
             case "야생1 이동":
                 e.setCancelled(true);
                 p.closeInventory();
-                TP.teleportSurvival1(p);
+                Teleport.getInstance().teleportSurvival1(p);
                 break; //야생1 이동
             case "야생2 이동":
                 e.setCancelled(true);
                 p.closeInventory();
-                TP.teleportSurvival2(p);
+                Teleport.getInstance().teleportSurvival2(p);
                 break; //야생2 이동
             case "야생3 이동":
                 e.setCancelled(true);
                 p.closeInventory();
-                TP.teleportSurvival3(p);
+                Teleport.getInstance().teleportSurvival3(p);
                 break; //야생3 이동
             case "메뉴 닫기":
                 e.setCancelled(true);
@@ -186,7 +186,7 @@ public class ItemInventory implements Listener {
             case "기록된 위치 삭제":
                 e.setCancelled(true);
                 p.closeInventory();
-                TP.resetRecordLocatins(p);
+                Teleport.getInstance().resetRecordLocatins(p);
                 break;
             default:
                 e.setCancelled(true);
@@ -195,12 +195,9 @@ public class ItemInventory implements Listener {
     }
 
     @EventHandler
-    public void onInventoryDrag(InventoryDragEvent e) {
+    private void onInventoryDrag(InventoryDragEvent e) {
         if (e.getInventory() == inv) {
             e.setCancelled(true);
-        }
-        else {
-            e.setCancelled(false);
         }
     }
 }

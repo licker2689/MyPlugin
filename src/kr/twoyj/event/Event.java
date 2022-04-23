@@ -3,6 +3,7 @@ package kr.twoyj.event;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,16 +21,25 @@ import java.util.Random;
 import static org.bukkit.Bukkit.getWorld;
 import static kr.twoyj.cmd.Ticket.ticket;
 import static kr.twoyj.cmd.MPCommand.loc;
+import static kr.twoyj.cmd.MPCommand.terror;
 
 public class Event implements Listener {
 
     @EventHandler
     private void onBreak(BlockBreakEvent e) {
         Player p = e.getPlayer();
-        if (p.getWorld() == getWorld("world") || p.getWorld() == getWorld("co_01") || p.getWorld() == getWorld("casino") || p.getWorld() == getWorld("minigame1")) {
+
+        if (terror) {
             if (!p.isOp()) {
+                p.sendMessage(ChatColor.RED + "오류: 테러 대응모드 활성화중이므로 블럭을 파괴할 수 없습니다.");
+                p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_FALL, 1, 1);
                 e.setCancelled(true);
-                p.sendMessage(ChatColor.RED + "오류: 해당 월드에서는 블럭 파괴가 불가능합니다!");
+            }
+        } else if (p.getWorld() == getWorld("world") || p.getWorld() == getWorld("co_01") || p.getWorld() == getWorld("casino") || p.getWorld() == getWorld("minigame1")) {
+            if (!p.isOp()) {
+                p.sendMessage(ChatColor.RED + "오류: 해당 월드에서는 블럭 파괴가 불가능합니다! 이용에 불편을 드려 죄송합니다.");
+                p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_FALL, 1, 1);
+                e.setCancelled(true);
             }
         }
     }
@@ -37,10 +47,30 @@ public class Event implements Listener {
     @EventHandler
     private void onPlace(BlockPlaceEvent e) {
         Player p = e.getPlayer();
-        if (p.getWorld() == getWorld("world") || p.getWorld() == getWorld("co_01") || p.getWorld() == getWorld("casino") || p.getWorld() == getWorld("minigame1")) {
+
+        if (terror) {
             if (!p.isOp()) {
+                p.sendMessage(ChatColor.RED + "오류: 테러 대응모드 활성화중이므로 블럭을 설치할 수 없습니다! 이용에 불편을 드려 죄송합니다.");
+                p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_FALL, 1, 1);
                 e.setCancelled(true);
+            }
+        } else if (p.getWorld() == getWorld("world") || p.getWorld() == getWorld("co_01") || p.getWorld() == getWorld("casino") || p.getWorld() == getWorld("minigame1")) {
+            if (!p.isOp()) {
                 p.sendMessage(ChatColor.RED + "오류: 해당 월드에서는 블럭 설치가 불가능합니다!");
+                p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_FALL, 1, 1);
+                e.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    private void onPlayerMove(PlayerMoveEvent e) {
+        Player p = e.getPlayer();
+
+        if (terror) {
+            if (!p.isOp()) {
+                p.sendMessage(ChatColor.RED + "오류: 테러 대응모드 활성화중이므로 움직일 수 없습니다! 이용에 불편을 드려 죄송합니다.");
+                e.setCancelled(true);
             }
         }
     }
