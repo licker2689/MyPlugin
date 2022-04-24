@@ -1,6 +1,5 @@
 package kr.twoyj.func;
 
-import kr.twoyj.cmd.MPCommand;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 
@@ -36,7 +35,7 @@ public class Teleport {
 
             Location Dest_Spawn = new Location(loc.get("spawn").getWorld(), loc.get("spawn").getX(), loc.get("spawn").getY(), loc.get("spawn").getZ()); //스폰
             p.teleport(Dest_Spawn);
-            p.sendMessage(ChatColor.GREEN + "성공적으로 텔레포트 되었습니다!");
+            p.sendMessage(ChatColor.YELLOW + "[안내] - " + ChatColor.LIGHT_PURPLE + "성공적으로 텔레포트 되었습니다!");
 
             gamemode_adventure(p);
         } else {
@@ -62,7 +61,7 @@ public class Teleport {
 
             Location Dest_Lobby = new Location(loc.get("lobby").getWorld(), loc.get("lobby").getX(), loc.get("lobby").getY(), loc.get("lobby").getZ()); //로비
             p.teleport(Dest_Lobby);
-            p.sendMessage(ChatColor.GREEN + "성공적으로 텔레포트 되었습니다!");
+            p.sendMessage(ChatColor.YELLOW + "[안내] - " + ChatColor.LIGHT_PURPLE + "성공적으로 텔레포트 되었습니다!");
 
             gamemode_adventure(p);
         } else {
@@ -88,7 +87,7 @@ public class Teleport {
 
             Location Dest_Casino = new Location(loc.get("casino").getWorld(), loc.get("casino").getX(), loc.get("casino").getY(), loc.get("casino").getZ()); //카지노
             p.teleport(Dest_Casino);
-            p.sendMessage(ChatColor.GREEN + "성공적으로 텔레포트 되었습니다!");
+            p.sendMessage(ChatColor.YELLOW + "[안내] - " + ChatColor.LIGHT_PURPLE + "성공적으로 텔레포트 되었습니다!");
 
             gamemode_adventure(p);
         } else {
@@ -114,7 +113,7 @@ public class Teleport {
 
             Location Dest_Minigame1 = new Location(loc.get("minigame1").getWorld(), loc.get("minigame1").getX(), loc.get("minigame1").getY(), loc.get("minigame1").getZ()); //미니게임1
             p.teleport(Dest_Minigame1);
-            p.sendMessage(ChatColor.GREEN + "성공적으로 텔레포트 되었습니다!");
+            p.sendMessage(ChatColor.YELLOW + "[안내] - " + ChatColor.LIGHT_PURPLE + "성공적으로 텔레포트 되었습니다!");
 
             gamemode_adventure(p);
 
@@ -126,7 +125,7 @@ public class Teleport {
     public void teleportSurvival1(Player p) {
         if (p.hasPermission("myplugin.teleport.survival")) {
             if (p.getWorld() == Bukkit.getWorld("surv1")) {
-                p.sendMessage(ChatColor.RED + "오류: 현재 " + ChatColor.GREEN + p.getName() + ChatColor.RED + "님은 이동하려는 월드와 같은 월드에 있으므로 이동을 취소했습니다.");
+                p.sendMessage(ChatColor.RED + "[오류] - " + ChatColor.LIGHT_PURPLE + "현재 " + ChatColor.GREEN + p.getName() + ChatColor.RED + "님은 이동하려는 월드와 같은 월드에 있으므로 이동을 취소했습니다.");
             } else {
                 if (p.getWorld() == Bukkit.getWorld("surv2")) {
                     UUID playerUUID = p.getUniqueId();
@@ -140,7 +139,7 @@ public class Teleport {
 
                 Location Dest_surv1 = new Location(loc.get("surv1").getWorld(), loc.get("surv1").getX(), loc.get("surv1").getY(), loc.get("surv1").getZ()); //야생1
                 p.teleport(Dest_surv1);
-                p.sendMessage(ChatColor.GREEN + "성공적으로 텔레포트 되었습니다!");
+                p.sendMessage(ChatColor.YELLOW + "[안내] - " + ChatColor.LIGHT_PURPLE + "성공적으로 텔레포트 되었습니다!");
 
                 gamemode_survival(p);
 
@@ -161,7 +160,7 @@ public class Teleport {
     public void teleportSurvival2(Player p) {
         if (p.hasPermission("myplugin.teleport.survival")) {
             if (p.getWorld() == Bukkit.getWorld("surv2")) {
-                p.sendMessage(ChatColor.RED + "오류: 현재 " + ChatColor.GREEN + p.getName() + ChatColor.RED + "님은 이동하려는 월드와 같은 월드에 있으므로 이동을 취소했습니다.");
+                p.sendMessage(ChatColor.RED + "[오류] - " + ChatColor.LIGHT_PURPLE + "현재 " + ChatColor.GREEN + p.getName() + ChatColor.RED + "님은 이동하려는 월드와 같은 월드에 있으므로 이동을 취소했습니다.");
             } else {
                 if (p.getWorld() == Bukkit.getWorld("surv1")) {
                     UUID playerUUID = p.getUniqueId();
@@ -175,7 +174,7 @@ public class Teleport {
 
                 Location Dest_surv2 = new Location(loc.get("surv2").getWorld(), loc.get("surv2").getX(), loc.get("surv2").getY(), loc.get("surv2").getZ()); //야생2
                 p.teleport(Dest_surv2);
-                p.sendMessage(ChatColor.GREEN + "성공적으로 텔레포트 되었습니다!");
+                p.sendMessage(ChatColor.YELLOW + "[안내] - " + ChatColor.LIGHT_PURPLE + "성공적으로 텔레포트 되었습니다!");
 
                 gamemode_survival(p);
 
@@ -196,7 +195,7 @@ public class Teleport {
     public void teleportSurvival3(Player p) {
         if (p.hasPermission("myplugin.teleport.survival")) {
             if (p.getWorld() == Bukkit.getWorld("surv3")) {
-                p.sendMessage(ChatColor.RED + "오류: 현재 " + ChatColor.GREEN + p.getName() + ChatColor.RED + "님은 이동하려는 월드와 같은 월드에 있으므로 이동을 취소했습니다.");
+                p.sendMessage(ChatColor.RED + "[오류] - " + ChatColor.LIGHT_PURPLE + "현재 " + ChatColor.GREEN + p.getName() + ChatColor.RED + "님은 이동하려는 월드와 같은 월드에 있으므로 이동을 취소했습니다.");
             } else {
                 if (p.getWorld() == Bukkit.getWorld("surv1")) {
                     UUID playerUUID = p.getUniqueId();
@@ -210,7 +209,7 @@ public class Teleport {
 
                 Location Dest_surv3 = new Location(loc.get("surv3").getWorld(), loc.get("surv3").getX(), loc.get("surv3").getY(), loc.get("surv3").getZ()); //야생3
                 p.teleport(Dest_surv3);
-                p.sendMessage(ChatColor.GREEN + "성공적으로 텔레포트 되었습니다!");
+                p.sendMessage(ChatColor.YELLOW + "[안내] - " + ChatColor.LIGHT_PURPLE + "성공적으로 텔레포트 되었습니다!");
 
                 gamemode_survival(p);
 
@@ -252,29 +251,28 @@ public class Teleport {
     }
 
     private void gamemode_adventure(Player p) {
-
         if (!p.isOp()) {
             p.setGameMode(GameMode.ADVENTURE);
-            p.sendMessage(ChatColor.LIGHT_PURPLE + "어드벤쳐 모드로 변경되었습니다.");
-            p.sendMessage(ChatColor.LIGHT_PURPLE + "현재 게임모드: " + ChatColor.WHITE + p.getGameMode());
+            p.sendMessage(ChatColor.YELLOW + "[안내] - " + ChatColor.LIGHT_PURPLE + "어드벤쳐 모드로 변경되었습니다.");
+            p.sendMessage(ChatColor.YELLOW + "[안내] - " + ChatColor.LIGHT_PURPLE + "현재 게임모드: " + ChatColor.WHITE + p.getGameMode());
         } else if (p.isOp()) {
-            p.sendMessage(ChatColor.LIGHT_PURPLE + "게임모드가 변경되지 않았습니다. 사유: 해당 플레이어는 OP를 소유하고 있습니다.");
+            p.sendMessage(ChatColor.YELLOW + "[안내] - " + ChatColor.LIGHT_PURPLE + "게임모드가 변경되지 않았습니다. 사유: 해당 플레이어는 OP를 소유하고 있습니다.");
         }
     }
 
     private void gamemode_survival(Player p) {
         if (!p.isOp()) {
             p.setGameMode(GameMode.SURVIVAL);
-            p.sendMessage(ChatColor.LIGHT_PURPLE + "서바이벌 모드로 변경되었습니다.");
-            p.sendMessage(ChatColor.LIGHT_PURPLE + "현재 게임모드: " + ChatColor.WHITE + p.getGameMode());
+            p.sendMessage(ChatColor.YELLOW + "[안내] - " + ChatColor.LIGHT_PURPLE + "서바이벌 모드로 변경되었습니다.");
+            p.sendMessage(ChatColor.YELLOW + "[안내] - " + ChatColor.LIGHT_PURPLE + "현재 게임모드: " + ChatColor.WHITE + p.getGameMode());
         } else if (p.isOp()) {
-            p.sendMessage(ChatColor.LIGHT_PURPLE + "게임모드가 변경되지 않았습니다. 사유: 해당 플레이어는 OP를 소유하고 있습니다.");
+            p.sendMessage(ChatColor.YELLOW + "[안내] - " + ChatColor.LIGHT_PURPLE + "게임모드가 변경되지 않았습니다. 사유: 해당 플레이어는 OP를 소유하고 있습니다.");
         }
     }
 
     private void no_permissions(Player p, String permissions) {
-        p.sendMessage(ChatColor.RED + "오류: 당신은 이 명령어를 사용할 권한이 없습니다!");
-        p.sendMessage(ChatColor.LIGHT_PURPLE + "안내: 어드민에게 아래 정보와 함께 권한을 요청해보세요.");
-        p.sendMessage(ChatColor.LIGHT_PURPLE + "플레이어: " + ChatColor.WHITE + p.getName() + ChatColor.LIGHT_PURPLE + " 퍼미션: " + ChatColor.WHITE + permissions);
+        p.sendMessage(ChatColor.RED + "[오류] - " + ChatColor.LIGHT_PURPLE + "당신은 이 명령어를 사용할 권한이 없습니다!");
+        p.sendMessage(ChatColor.YELLOW + "[안내] - " + ChatColor.LIGHT_PURPLE + "어드민에게 아래 정보와 함께 권한을 요청해보세요.");
+        p.sendMessage(ChatColor.YELLOW + "[안내] - " + ChatColor.LIGHT_PURPLE + "플레이어: " + ChatColor.WHITE + p.getName() + ChatColor.LIGHT_PURPLE + " 퍼미션: " + ChatColor.WHITE + permissions);
     }
 }

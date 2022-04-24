@@ -84,7 +84,7 @@ public class GUIPlugin extends JavaPlugin implements CommandExecutor {
 
     private void saveMaps1() {
         try {
-            if (!map1.isEmpty()) {
+            if (!(map1.size() == 0)) {
                 getLogger().info("[map1 저장 시작]");
                 for (Map.Entry<UUID, Location> entry : map1.entrySet()) {
                     getConfig().set("maps.map1." + entry.getKey(), entry.getValue());
@@ -103,7 +103,7 @@ public class GUIPlugin extends JavaPlugin implements CommandExecutor {
 
     private void saveMaps2() {
         try {
-            if (!map2.isEmpty()) {
+            if (!(map2.size() == 0)) {
                 getLogger().info("[map2 저장 시작]");
                 for (Map.Entry<UUID, Location> entry : map2.entrySet()) {
                     getConfig().set("maps.map2." + entry.getKey(), entry.getValue());
@@ -121,7 +121,7 @@ public class GUIPlugin extends JavaPlugin implements CommandExecutor {
 
     private void saveMaps3() {
         try {
-            if (!map2.isEmpty()) {
+            if (!(map2.size() == 0)) {
                 getLogger().info("[map3 저장 시작]");
                 for (Map.Entry<UUID, Location> entry : map3.entrySet()) {
                     getConfig().set("maps.map3." + entry.getKey(), entry.getValue());
@@ -139,7 +139,7 @@ public class GUIPlugin extends JavaPlugin implements CommandExecutor {
 
     private void saveHome() {
         try {
-            if (!home.isEmpty()) {
+            if (!(home.size() == 0)) {
                 getLogger().info("[home 저장 시작]");
                 for (Map.Entry<UUID, Location> entry : home.entrySet()) {
                     getConfig().set("maps.home." + entry.getKey(), entry.getValue());
@@ -157,7 +157,7 @@ public class GUIPlugin extends JavaPlugin implements CommandExecutor {
 
     private void saveTicket() {
         try {
-            if (!ticket.isEmpty()) {
+            if (!(ticket.size() == 0)) {
                 getLogger().info("[ticket 저장 시작]");
                 for (Map.Entry<UUID, Integer> entry : ticket.entrySet()) {
                     getConfig().set("maps.ticket." + entry.getKey(), entry.getValue());
@@ -182,9 +182,7 @@ public class GUIPlugin extends JavaPlugin implements CommandExecutor {
     }
 
     public void restoreMaps() {
-        if (getConfig().getConfigurationSection("maps.map1").getKeys(false).isEmpty()) {
-            getLogger().info("[map1 불러오기중, 경로에 값이 존재하지 않습니다]");
-        } else {
+        try {
             getLogger().info("[map1 불러오기 시작]");
             getConfig().getConfigurationSection("maps.map1").getKeys(false).forEach(key -> {
                 Location content = ((Location) getConfig().get("maps.map1." + key));
@@ -192,12 +190,13 @@ public class GUIPlugin extends JavaPlugin implements CommandExecutor {
                 map1.put(UUID.fromString(key), content);
             });
             getLogger().info("[map1 불러오기 완료]");
+        } catch (Exception e) {
+            getLogger().info("[map1 불러오기 실패]");
+            e.printStackTrace();
         }
 
 
-        if (getConfig().getConfigurationSection("maps.map2").getKeys(false).isEmpty()) {
-            getLogger().info("[map2 불러오기중, 경로에 값이 존재하지 않습니다]");
-        } else {
+        try {
             getLogger().info("[map2 불러오기 시작]");
             getConfig().getConfigurationSection("maps.map2").getKeys(false).forEach(key -> {
                 Location content = ((Location) getConfig().get("maps.map2." + key));
@@ -205,12 +204,13 @@ public class GUIPlugin extends JavaPlugin implements CommandExecutor {
                 map2.put(UUID.fromString(key), content);
             });
             getLogger().info("[map2 불러오기 완료]");
+        } catch (Exception e) {
+            getLogger().info("[map2 불러오기 실패]");
+            e.printStackTrace();
         }
 
 
-        if (getConfig().getConfigurationSection("maps.map3").getKeys(false).isEmpty()) {
-            getLogger().info("[map3 불러오기중, 경로에 값이 존재하지 않습니다]");
-        } else {
+        try {
             getLogger().info("[map3 불러오기 시작]");
             getConfig().getConfigurationSection("maps.map3").getKeys(false).forEach(key -> {
                 Location content = ((Location) getConfig().get("maps.map3." + key));
@@ -218,12 +218,13 @@ public class GUIPlugin extends JavaPlugin implements CommandExecutor {
                 map3.put(UUID.fromString(key), content);
             });
             getLogger().info("[map3 불러오기 완료]");
+        } catch (Exception e) {
+            getLogger().info("[map3 불러오기 실패]");
+            e.printStackTrace();
         }
 
 
-        if (getConfig().getConfigurationSection("maps.home").getKeys(false).isEmpty()) {
-            getLogger().info("[home 불러오기중, 경로에 값이 존재하지 않습니다]");
-        } else {
+        try {
             getLogger().info("[home 불러오기 시작]");
             getConfig().getConfigurationSection("maps.home").getKeys(false).forEach(key -> {
                 Location content = ((Location) getConfig().get("maps.home." + key));
@@ -231,6 +232,9 @@ public class GUIPlugin extends JavaPlugin implements CommandExecutor {
                 home.put(UUID.fromString(key), content);
             });
             getLogger().info("[home 불러오기 완료]");
+        } catch (Exception e) {
+            getLogger().info("[home 불러오기 실패]");
+            e.printStackTrace();
         }
 
 

@@ -10,7 +10,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kr/twoyj/GUIPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/twoyj/GUIPlugin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kr/twoyj/cmd/MPCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/twoyj/cmd/MPCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/kr/twoyj/event/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/twoyj/event/Event.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/kr/twoyj/func/Teleport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/kr/twoyj/func/Teleport.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -118,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650722193734</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="**[이번 업데이트 내용]**&#10;&#10;&gt; 안내/오류 메시지 색상 변경 및 가독성 향상&#10;&gt; 객체지향의 일환(?)으로 중복 코드 제거">
+      <created>1650808727039</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1650808727039</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
