@@ -101,15 +101,19 @@ public class Event implements Listener {
     @EventHandler
     private void onPlayerChat(AsyncPlayerChatEvent e) {
         Player p = e.getPlayer();
-        if (p.getName().equals("yejunho10") | p.getName().equals("ikevin0920")) {
+        if (p.getName().equals("yejunho10")) {
             e.setFormat(ChatColor.WHITE + "[" + ChatColor.BLUE + "MASTER" + ChatColor.WHITE + " - " + ChatColor.AQUA + e.getPlayer().getName() + ChatColor.WHITE + "] " + e.getMessage());
-        } else if (p.getName().equals("KRHSJ") | p.getName().equals("Mustabi")) {
+        } else if (p.getName().equals("KRHSJ")) {
             e.setFormat(ChatColor.WHITE + "[" + ChatColor.YELLOW + "STAFF" + ChatColor.WHITE + " - " + ChatColor.AQUA + e.getPlayer().getName() + ChatColor.WHITE + "] " + e.getMessage());
         } else if (p.getName().equals("billy0224")) {
             e.setFormat(ChatColor.WHITE + "[" + ChatColor.GREEN + "BUILDER" + ChatColor.WHITE + " - " + ChatColor.AQUA + e.getPlayer().getName() + ChatColor.WHITE + "] " + e.getMessage());
-        } else if (p.isOp()) {
+        } else if (p.getName().equals("seaduck138") || p.getName().equals("ROJA4515")) {
+            e.setFormat(ChatColor.WHITE + "[" + ChatColor.RED + "TOP ADMIN" + ChatColor.WHITE + " - " + ChatColor.AQUA + e.getPlayer().getName() + ChatColor.WHITE + "] " + e.getMessage());
+        } else if (p.getName().equals("Gigammas")) {
             e.setFormat(ChatColor.WHITE + "[" + ChatColor.RED + "ADMIN" + ChatColor.WHITE + " - " + ChatColor.AQUA + e.getPlayer().getName() + ChatColor.WHITE + "] " + e.getMessage());
-        } else if (!p.isOp()) {
+        } else if (p.isOp()) {
+            e.setFormat(ChatColor.WHITE + "[" + ChatColor.GOLD + "임시 OP" + ChatColor.WHITE + " - " + ChatColor.AQUA + e.getPlayer().getName() + ChatColor.WHITE + "] " + e.getMessage());
+        } else {
             e.setFormat(ChatColor.WHITE + "[" + ChatColor.GOLD + "USER" + ChatColor.WHITE + " - " + ChatColor.AQUA + e.getPlayer().getName() + ChatColor.WHITE + "] " + e.getMessage());
         }
     }
